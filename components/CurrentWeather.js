@@ -21,6 +21,9 @@ export default function CurrentWeather( {data}) {
         <>
         {/* le ? c'est pour ne pas fair crasher l'app si c'est null */}
         <Text> {data?.city?.name} </Text>
+        <Text> Aujourd'hui </Text>
+        <Text> {currentWeather?.main.temp}°C </Text>
+        <Text> {currentWeather?.weather[0].description} </Text>
         </>
     )
 }
