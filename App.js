@@ -8,7 +8,7 @@ import { ActivityIndicator } from 'react-native-paper';
 //pour prendre en compte la latitude et la longitude, je vais transformer ma variable en fonction qui va prendre en parametre lat et lon.
 //pour que les params soit pris en compte, je n'oublie ${}
 //à la fin je rajoute la langue et le systeme metric
-const API_URL = (lat, lon) => `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid={08f65d029ed8ed2dae819f4187007ade}&lang=fr&units=metric`
+const API_URL = (lat, lon) => `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid={c06df36511a5533ffa36ba95e320a09c}&lang=fr&units=metric`
 
 export default function App() {
   //1- on recupere les coordonnées de l'utilisateur
@@ -38,8 +38,11 @@ useEffect(()=>{
   const getWeather = async(location) => {
     try {
     const response = await axios.get(API_URL(location.coords.latitude, location.coords.longitude))
+
       setData(response.data)
+
       setLoading(false)
+
     } catch(e) {
       console.log("Erreur dans getWeather")
     }
@@ -53,7 +56,7 @@ useEffect(()=>{
   
   return (
     <View style={styles.container}>
-      {/* le ? c'est pour ne pas fair crasher l'app si il y a des erreurs */}
+      {/* le ? c'est pour ne pas fair crasher l'app si c'est null */}
      <Text>{data?.city?.name}</Text>
     </View>
   );
@@ -63,6 +66,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
     paddingTop: Constants.statusBarHeight,
     backgroundColor: '#ecf0f1',
     padding: 8,
