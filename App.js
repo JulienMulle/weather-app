@@ -5,7 +5,8 @@ import * as Location from 'expo-location';
 
 //pour prendre en compte la latitude et la longitude, je vais transformer ma variable en fonction qui va prendre en parametre lat et lon.
 //pour que les params soit pris en compte, je n'oublie ${}
-const API_URL = (lat, lon) => `api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid={08f65d029ed8ed2dae819f4187007ade}`
+//à la fin je rajoute la langue et le systeme metric
+const API_URL = (lat, lon) => `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid={08f65d029ed8ed2dae819f4187007ade}&lang=fr&units=metric`
 
 export default function App() {
   //1- on recupere les coordonnées de l'utilisateur
