@@ -3,6 +3,10 @@ import { Text, View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 
+//pour prendre en compte la latitude et la longitude, je vais transformer ma variable en fonction qui va prendre en parametre lat et lon.
+//pour que les params soit pris en compte, je n'oublie ${}
+const API_URL = (lat, lon) => `api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid={08f65d029ed8ed2dae819f4187007ade}`
+
 export default function App() {
   //1- on recupere les coordonnées de l'utilisateur
   const [location, setLocation] = useState(null)
