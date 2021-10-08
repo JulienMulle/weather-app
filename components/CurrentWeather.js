@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 
 export default function CurrentWeather( {data}) {
+
+    useEffect(() => {
+        data.list.filter(forecast)
+    }, [data])
 
     return (
         <>
