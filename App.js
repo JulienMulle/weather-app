@@ -4,6 +4,7 @@ import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import axios from 'axios';
 import { ActivityIndicator } from 'react-native-paper';
+import CurrentWeather from './components/CurrentWeather';
 
 //pour prendre en compte la latitude et la longitude, je vais transformer ma variable en fonction qui va prendre en parametre lat et lon.
 //pour que les params soit pris en compte, je n'oublie ${}
@@ -57,7 +58,7 @@ useEffect(()=>{
   return (
     <View style={styles.container}>
       {/* le ? c'est pour ne pas fair crasher l'app si c'est null */}
-     <Text>{data?.city?.name}</Text>
+     <CurrentWeather />
     </View>
   );
 }
