@@ -12,7 +12,7 @@ useEffect(()=>{
   // je ne peux pas stocker directement une fonction asynchrone dans useEffect, donc je vais la stocker
   //Pour recuperer le resultat, je vais destructurer la reponse
   const getCoordinates = async () =>{
-  const { status} = await Location.requestForegroundPermissionAsync()
+  const { status} = await Location.requestForegroundPermissionsAsync()
   // je verifie le status
   if (status !== "granted") {
     return
@@ -28,7 +28,7 @@ useEffect(()=>{
 //je verifie si location n'est pas null 
 if (!location) {
   return    <View style={styles.container}>
-      <Text> location est null </Text>
+      <Text> Domage, je ne peux pas afficher la météo où tu es situé </Text>
     </View>
 }
   //2- realiser une requete vers nos serveur
