@@ -4,17 +4,17 @@ import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import axios from 'axios';
 import { ActivityIndicator } from 'react-native-paper';
-import CurrentWeather from './components/CurrentWeather';
+//import CurrentWeather from './components/CurrentWeather';
 
 //pour prendre en compte la latitude et la longitude, je vais transformer ma variable en fonction qui va prendre en parametre lat et lon.
 //pour que les params soit pris en compte, je n'oublie ${}
 //à la fin je rajoute la langue et le systeme metric
-const API_URL = (lat, lon) => `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid={c06df36511a5533ffa36ba95e320a09c}&lang=fr&units=metric`
+const API_URL = (lat, lon) => `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid={4317e5edbbc109394215be6d46884d0c}&lang=fr&units=metric`
 
 export default function App() {
   //1- on recupere les coordonnées de l'utilisateur
-  const [loading, setLoading] = useState(true)
-  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
   
 
 useEffect(()=>{
@@ -22,43 +22,46 @@ useEffect(()=>{
   // je ne peux pas stocker directement une fonction asynchrone dans useEffect, donc je vais la stocker
   //Pour recuperer le resultat, je vais destructurer la reponse
   const getCoordinates = async () =>{
-  const { status} = await Location.requestForegroundPermissionsAsync()
+  const { status} = await Location.requestForegroundPermissionsAsync();
   // je verifie le status
   if (status !== "granted") {
     return
   }
   // je vais recuperer sa permission
-  const userLocation = await Location.getCurrentPositionAsync()
-  getWeather(userLocation)
+  const userLocation = await Location.getCurrentPositionAsync();
+  getWeather(userLocation);
   }
 
-  getCoordinates()
+  getCoordinates();
 }, [])
 
   //2- realiser une requete vers nos serveur
-  const getWeather = async(location) => {
+  const getWeather = async (location) => {
     try {
-    const response = await axios.get(API_URL(location.coords.latitude, location.coords.longitude))
+    const response = await axios.get(API_URL(location.coords.latitude, location.coords.longitude));
 
-      setData(response.data)
-
-      setLoading(false)
-
+      setData(response.data);
+      setLoading(false);
+      
     } catch(e) {
-      console.log("Erreur dans getWeather")
+      console.log("Erreur dans getWeather");
+      console.log(location);
     }
-  }
+
+  };
 
   if (loading) {
     return    <View style={styles.container}>
         <ActivityIndicator />
+        <Text>Hello Darkness, my old friend</Text>
+        <Text> Cache-cache erreur, trouve-moi !</Text>
       </View>
   }
   
   return (
     <View style={styles.container}>
-      {/* le ? c'est pour ne pas fair crasher l'app si c'est null */}
-     <CurrentWeather />
+      
+     <CurrentWeather data={data} />
     </View>
   );
 }
