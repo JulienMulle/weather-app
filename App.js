@@ -4,12 +4,12 @@ import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import axios from 'axios';
 import { ActivityIndicator } from 'react-native-paper';
-//import CurrentWeather from './components/CurrentWeather';
+import CurrentWeather from './components/CurrentWeather';
 
 //pour prendre en compte la latitude et la longitude, je vais transformer ma variable en fonction qui va prendre en parametre lat et lon.
 //pour que les params soit pris en compte, je n'oublie ${}
 //à la fin je rajoute la langue et le systeme metric
-const API_URL = (lat, lon) => `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid={4317e5edbbc109394215be6d46884d0c}&lang=fr&units=metric`
+const API_URL = (lat, lon) => `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=4317e5edbbc109394215be6d46884d0c&lang=fr&units=metric`
 
 export default function App() {
   //1- on recupere les coordonnées de l'utilisateur
@@ -44,8 +44,8 @@ useEffect(()=>{
       setLoading(false);
       
     } catch(e) {
-      console.log("Erreur dans getWeather");
-      console.log(location);
+      console.log(data);
+      
     }
 
   };
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#E2E6',
+    backgroundColor: '#E2E6E1',
     padding: 8,
   },
 });
