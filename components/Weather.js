@@ -10,11 +10,11 @@ export default function Weather({ forecast }){
         <View style={styles.container} >
         <Text>{forecast.name}</Text>
         <Text>{forecast.hour}h</Text>
-        {/*<Image
-            source={{uri: getIcon(forecast.weather[0].icon)}}
+        <Image
+            source={{uri: getIcon(forecast.icon)}}
             style={styles.image}
-        />*/}
-        <Text>{forecast.temp}°C</Text>
+        />
+        <Text style={styles.temp}>{forecast.temp}°C</Text>
         </View>
     )
 }
@@ -26,12 +26,17 @@ const styles = StyleSheet.create({
         width: 75,
         paddingVertical:6,
         justifyContent: "center",
+        alignItems: "center",
         marginRight: 10, 
         borderRadius: 50
     },
     image: {
         width: 50,
         height: 50
+    },
+    temp: {
+        fontSize: 18,
+        fontWeight: "bold"
     }
 
 })
