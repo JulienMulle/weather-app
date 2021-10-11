@@ -22,13 +22,13 @@ export default function CurrentWeather( {data}) {
     return (
         <View>
         {/* le ? c'est pour ne pas fair crasher l'app si c'est null */}
-        <Text style={styles.city}> {data.city.name} </Text>
+        <Text style={styles.city}> {data?.city?.name} </Text>
         <Text style={styles.today}> Aujourd'hui </Text>
         <Image 
             source={{ uri: getIcon(currentWeather?.weather[0].icon)}} 
-            style={styles.Image}
+            style={styles.image}
         />
-        <Text style={styles.temp}> {currentWeather?.main.temp}°C </Text>
+        <Text style={styles.temp}> {Math.round(currentWeather?.main.temp)}°C </Text>
         <Text style={styles.description}> {currentWeather?.weather[0].description} </Text>
         </View>
     )
