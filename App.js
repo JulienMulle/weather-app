@@ -62,10 +62,9 @@ useEffect(()=>{
   }
   
   return (
-    <View style={styles.container}>
-      
+    <View style={styles.container}>      
      <CurrentWeather data={data} />
-     <Forecasts /> 
+     <Forecasts data={data} /> 
     </View>
   );
 }
