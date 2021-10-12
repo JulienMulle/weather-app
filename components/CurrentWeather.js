@@ -20,7 +20,7 @@ export default function CurrentWeather( {data}) {
     }, [data])
 
     return (
-        <View>
+        <View style={styles.container}>
         {/* le ? c'est pour ne pas fair crasher l'app si c'est null */}
         <Text style={styles.city}> {data?.city?.name} </Text>
         <Text style={styles.today}> Aujourd'hui </Text>
@@ -61,5 +61,10 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "bold",
         color: COLOR
+    },
+    container:{
+        marginTop: 60,
+        alignItems: "center",
+        height: "65%"
     }
 })
