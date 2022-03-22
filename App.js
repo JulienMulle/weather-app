@@ -48,16 +48,13 @@ useEffect(()=>{
       
     } catch(e) {
       console.log(data);
-      
     }
-
   };
 
   if (loading) {
     return    <View style={styles.container}>
         <ActivityIndicator />
         <Text>Hello Darkness, my old friend</Text>
-        <Text> Cache-cache erreur, trouve-moi !</Text>
       </View>
   }
   

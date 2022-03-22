@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View, Text } from 'react-native';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
@@ -22,7 +22,25 @@ export default function Forecasts({ data }){
                name: format(dt, "EEEE", { locale: fr})
           })
        })
-       setForecasts(forecastsData)
+       //logique pour un regroupement des éléments pour chaques journées
+
+        //1. j'ai un tableau avec plusieurs jour: [lundi, lundi, lundi, mardi,...]
+        //2. je veux regrouper(filter) les mêmes jour ensemble: [lundi, mardi,...]
+        //3. je veux transmettre mes données pour chaques jours du nouveau tableau [{day: name, data: [forecast, forecast]}, {}, {}]
+        let newForecastData = forecastsData.map(forecast => {
+            return forecast.name
+        }).filter((day, index, self)=>{
+            //suppression des doublons, self.indexof(day) === index va prendre le premier element du tableau et je n'aurais plus de doublons(lundi, lundi)
+            return self.indexOf(day) === index
+        }).map((day)=>{
+            // je renvoi mon tableau 3. de prevision qui correspond au jour (lundi)
+            return{
+                day,
+                data: forecastsData.filter((forecast)=> forecast.name === day)
+            }
+        })
+        console.log(newForecastData)
+       setForecasts(newForecastData)
    }, [data])
 
     return (
@@ -33,7 +51,10 @@ export default function Forecasts({ data }){
             styles={styles.scroll}
             >
            {forecasts.map(p =>(
-               <Weather forecast={p} />
+               <View id={p.id}>
+                <Text>{p.day}</Text>
+                {p.data.map(w => <Weather forecast={w} />)}
+               </View>
            ))}
         </ScrollView>
     )
