@@ -10,6 +10,7 @@ export default function Weather({ forecast }){
         <View style={styles.container} >
         <Text>{forecast.name}</Text>
         <Text>{forecast.hour}h</Text>
+        <Text>{forecast.description}</Text>
         <Image
             source={{uri: getIcon(forecast.icon)}}
             style={styles.image}
@@ -22,13 +23,13 @@ export default function Weather({ forecast }){
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "white",
-        height: 140,
-        width: 75,
+        height: 190,
+        width: 100,
         paddingVertical:6,
         justifyContent: "center",
         alignItems: "center",
         marginRight: 10, 
-        borderRadius: 50
+        borderRadius: 25
     },
     image: {
         width: 50,

@@ -18,10 +18,12 @@ export default function Forecasts({ data }){
                hour: dt.getHours(),
                //j'arrondis la temp
                temp: Math.round(p.main.temp),
+               description: p.weather[0].description,
                icon: p.weather[0].icon,
+               //je remplace le format USA par le format EU grace à date-fns
                name: format(dt, "EEEE", { locale: fr})
-          })
-       })
+          });
+       });
        //logique pour un regroupement des éléments pour chaques journées
 
         //1. j'ai un tableau avec plusieurs jour: [lundi, lundi, lundi, mardi,...]
@@ -38,7 +40,7 @@ export default function Forecasts({ data }){
                 day,
                 data: forecastsData.filter((forecast)=> forecast.name === day)
             }
-        })
+        });
         console.log(newForecastData)
        setForecasts(newForecastData)
    }, [data])
@@ -52,8 +54,10 @@ export default function Forecasts({ data }){
             >
            {forecasts.map(p =>(
                <View id={p.id}>
-                <Text>{p.day}</Text>
-                {p.data.map(w => <Weather forecast={w} />)}
+                <Text style={styles.day}>{p.day}</Text>
+                <View style={styles.container}>
+                    {p.data.map(w => <Weather forecast={w} />)}
+                </View>
                </View>
            ))}
         </ScrollView>
@@ -64,5 +68,17 @@ const styles = StyleSheet.create({
     scroll: {
         width: "100%",
         height: "35%"
+    }, 
+    day: {
+        fontSize: 16, 
+        fontWeight: "bold",
+        marginBottom: 10,
+        marginLeft: 5
+    },
+    container: {
+        flexDirection: "row",
+        marginLeft: 5,
+        marginRight: 5
     }
+
 })

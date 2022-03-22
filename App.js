@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#E2E6E1',
+    backgroundColor: 'hsl(205, 90%, 88%)',
     padding: 8,
   },
 });
